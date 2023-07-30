@@ -1,0 +1,25 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_db
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/user_db
+    user: postgres
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    allow-bean-definition-overriding: true
+#vaadin:
+#  productionMode: true

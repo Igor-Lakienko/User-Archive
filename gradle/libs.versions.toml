@@ -1,0 +1,44 @@
+[versions]
+spring-boot-version = '3.1.1'
+vaadin-version = '24.1.1'
+liquibase-version = '2.1.1'
+postgresql-version = '42.5.4'
+testcontainers-bom-version = '1.18.3'
+jwt-version = '0.11.5'
+
+[libraries]
+#dependencies for spring
+spring-boot-web = { module = 'org.springframework.boot:spring-boot-starter-web' }
+spring-boot-data-jpa = { module = 'org.springframework.boot:spring-boot-starter-data-jpa' }
+spring-boot-validation = { module = 'org.springframework.boot:spring-boot-starter-validation' }
+spring-boot-security = { module = 'org.springframework.boot:spring-boot-starter-security' }
+
+jjwt-api = { module = 'io.jsonwebtoken:jjwt-api', version.ref = 'jwt-version' }
+jjwt-impl = { module = 'io.jsonwebtoken:jjwt-impl', version.ref = 'jwt-version' }
+jjwt-jackson = { module = 'io.jsonwebtoken:jjwt-jackson', version.ref = 'jwt-version' }
+
+#dependencies for vaadin
+vaadin-starter = { module = 'com.vaadin:vaadin-spring-boot-starter', version.ref = 'vaadin-version' }
+vaadin-bom = { module = 'com.vaadin:vaadin-bom', version.ref = 'vaadin-version' }
+
+#dependencies for database
+liquibase-core = { module = 'org.liquibase:liquibase-core' }
+postgresql = { module = 'org.postgresql:postgresql', version.ref = 'postgresql-version' }
+
+#usefully tools
+lombok = { module = 'org.projectlombok:lombok' }
+
+#dependencies for testing
+spring-boot-test = { module = 'org.springframework.boot:spring-boot-starter-test' }
+junit-test = { module = 'org.junit.jupiter:junit-jupiter' }
+testcontainers = { module = 'org.testcontainers:testcontainers' }
+testcontainers-junit-jupiter = { module = 'org.testcontainers:junit-jupiter' }
+testcontainers-postgresql = { module = 'org.testcontainers:postgresql' }
+testcontainers-bom = { module = 'org.testcontainers:testcontainers-bom', version.ref = 'testcontainers-bom-version' }
+
+[bundles]
+testcontainers = ['testcontainers', 'testcontainers-junit-jupiter', 'testcontainers-postgresql']
+
+[plugins]
+springframework = { id = 'org.springframework.boot', version.ref = 'spring-boot-version' }
+liquibase = { id = 'org.liquibase.gradle', version.ref = 'liquibase-version' }

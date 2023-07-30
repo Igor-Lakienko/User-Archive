@@ -1,0 +1,58 @@
+plugins {
+    alias(libs.plugins.springframework)
+    alias(libs.plugins.liquibase)
+}
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.lakienkoigor'
+version = '1.0.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+repositories {
+    maven { url 'https://repo.spring.io/milestone' }
+    mavenCentral()
+}
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    //dependencies for spring
+    implementation(libs.spring.boot.web)
+    implementation(libs.spring.boot.data.jpa)
+    implementation(libs.spring.boot.validation)
+    implementation(libs.spring.boot.security)
+
+    //dependencies for security
+    implementation(libs.jjwt.api)
+    implementation(libs.jjwt.impl)
+    implementation(libs.jjwt.jackson)
+
+    //dependencies for vaadin
+    implementation(libs.vaadin.starter)
+    implementation(libs.vaadin.bom)
+
+    //dependencies for database
+    implementation(libs.postgresql)
+    implementation(libs.liquibase.core)
+
+    //usefully tools
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
+
+    //dependencies for testing
+    testImplementation(libs.spring.boot.test)
+    testCompileOnly(libs.lombok)
+    testAnnotationProcessor(libs.lombok)
+    testImplementation(libs.junit.test)
+    testImplementation(libs.bundles.testcontainers)
+    implementation platform(libs.testcontainers.bom)
+}
+tasks.named('test') {
+    useJUnitPlatform()
+}
